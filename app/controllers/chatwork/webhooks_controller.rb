@@ -1,8 +1,9 @@
 class Chatwork::WebhooksController < ApplicationController
   def create
     @message_info = ::Chatwork::SanitizeHelper.new(params).excute
+    predicted_message = Dialogflow::PostMan.new(@message_info[:body]).predicted_message
 
-    # TODO Send it to API.AI
-    Chatwork::Speaker.new(@message_info[:room_id], @message_info[:sender_id], "It's work").speak
+    Chatwork::Speaker
+      .new(@message_info[:room_id], @message_info[:sender_id], predicted_message).speak
   end
 end
