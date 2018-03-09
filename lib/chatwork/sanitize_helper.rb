@@ -8,8 +8,9 @@ class Chatwork::SanitizeHelper
   end
 
   def excute
+    content = body.sub(/^\A(.*)$/, '')
     {
-      body: body,
+      body: content,
       sender_id: sender_id,
       room_id: room_id
     }
