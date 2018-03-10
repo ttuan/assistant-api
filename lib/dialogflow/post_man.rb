@@ -6,13 +6,7 @@ class Dialogflow::PostMan
     @message = message
   end
 
-  def predicted_message
-    parse_response client.text_request(message)
-  end
-
-  private
-  def parse_response response
-    mess = response[:result][:fulfillment][:speech]
-    mess.empty? ? Settings.default.message : mess
+  def perform
+    client.text_request message
   end
 end
