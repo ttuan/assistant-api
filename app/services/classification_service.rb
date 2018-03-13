@@ -7,9 +7,11 @@ class ClassificationService
   end
 
   def perform
-    unless (action = response[:action]).empty?
-      "#{action.camelize}Service".safe_constantize.new(response[:parameters][:name], current_user).perform
+    service = "#{response[:action].camelize}Service".safe_constantize
+    if service.present?
+      service.new(response[:parameters][:name], current_user).perform
     end
+
     response[:fulfillment][:speech]
   end
 end
