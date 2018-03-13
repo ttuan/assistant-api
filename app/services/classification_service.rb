@@ -7,11 +7,18 @@ class ClassificationService
   end
 
   def perform
-    service = "#{response[:action].camelize}Service".safe_constantize
     if service.present?
-      message = service.new(response[:parameters][:name], current_user).perform
+      message = service.new(response[:parameters], current_user).perform
     end
 
     message || response[:fulfillment][:speech]
+  end
+
+  private
+  def service
+    full_name = response[:action].split("__")
+    namespace = full_name[0]
+    action = full_name[1]
+    service = "#{namespace.try :camelize}::#{action.try :camelize}Service".safe_constantize
   end
 end
