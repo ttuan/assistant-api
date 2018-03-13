@@ -1,8 +1,8 @@
-class ComicRegisterService
+class Comic::RegisterService
   attr_reader :comic_names, :current_user
 
   def initialize comic_names, current_user
-    @comic_names = comic_names
+    @comic_names = comic_names[:name]
     @current_user = current_user
   end
 
