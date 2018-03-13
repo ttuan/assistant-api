@@ -17,6 +17,13 @@ class Chatwork::WebhooksController < ApplicationController
   end
 
   def current_user
-    @current_user ||= User.find_by provider: "chatwork", uid: cw_message[:sender_id]
+    info = {provider: "chatwork", uid: cw_message[:sender_id]}
+    @current_user ||= if User.exists?(info)
+                        User.find_by info
+                      else
+                        client = ChatWork::Client.new(api_key: ENV["CHATWORK_API_KEY"])
+                        name = client.get_contacts.select {|x| x["account_id"] == cw_message[:sender_id]}.first["name"]
+                        User.create info.merge(name: name)
+                      end
   end
 end
