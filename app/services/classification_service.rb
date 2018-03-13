@@ -9,9 +9,9 @@ class ClassificationService
   def perform
     service = "#{response[:action].camelize}Service".safe_constantize
     if service.present?
-      service.new(response[:parameters][:name], current_user).perform
+      message = service.new(response[:parameters][:name], current_user).perform
     end
 
-    response[:fulfillment][:speech]
+    message || response[:fulfillment][:speech]
   end
 end

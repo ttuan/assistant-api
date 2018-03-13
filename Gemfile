@@ -9,9 +9,11 @@ gem "api-ai-ruby"
 gem "chatwork"
 gem "config"
 gem "google-api-client"
+gem "mechanize"
 gem "rails", "~> 5.1.5"
 gem "mysql2"
 gem "puma", "~> 3.7"
+gem "whenever", require: false
 
 group :development, :test do
   gem "pry"
