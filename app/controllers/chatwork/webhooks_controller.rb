@@ -2,9 +2,7 @@ class Chatwork::WebhooksController < ApplicationController
 
   def create
     message = ClassificationService.new(dialog_response[:result], current_user).perform
-
-    Chatwork::Speaker
-      .new(cw_message[:room_id], cw_message[:sender_id], message).speak
+    Chatwork::Speaker.new(current_user, message).speak
   end
 
   private
@@ -17,7 +15,7 @@ class Chatwork::WebhooksController < ApplicationController
   end
 
   def current_user
-    info = {provider: "chatwork", uid: cw_message[:sender_id]}
+    info = {provider: "chatwork", uid: cw_message[:sender_id], room_id: cw_message[:room_id]}
     @current_user ||= if User.exists?(info)
                         User.find_by info
                       else
