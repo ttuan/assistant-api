@@ -1,24 +1,8 @@
-# README
+# Assistant API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+My assistant, who can help me do some small tasks.
 
-Things you may want to cover:
+It's still in idea phase and this assistant is very stupid. Please add her
+chatwork account with email: `tuantv.nhnd@gmail.com` and chat with her =))
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+All work can be find [issues](https://github.com/ttuan/assistant-api/issues)
