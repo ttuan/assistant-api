@@ -46,7 +46,7 @@ GEM
       http (~> 2.0)
     arel (8.0.0)
     builder (3.2.3)
-    capistrano (3.10.1)
+    capistrano (3.8.2)
       airbrussh (>= 1.0.0)
       i18n
       rake (>= 10.0.0)
@@ -62,8 +62,8 @@ GEM
     capistrano-rvm (0.1.2)
       capistrano (~> 3.0)
       sshkit (~> 1.2)
-    capistrano-sidekiq (1.0.0)
-      capistrano (>= 3.9.0)
+    capistrano-sidekiq (0.10.0)
+      capistrano
       sidekiq (>= 3.4)
     chatwork (0.8.0)
       faraday (~> 0.9)
@@ -88,7 +88,7 @@ GEM
     dry-container (0.6.0)
       concurrent-ruby (~> 1.0)
       dry-configurable (~> 0.1, >= 0.1.3)
-    dry-core (0.4.4)
+    dry-core (0.4.5)
       concurrent-ruby (~> 1.0)
     dry-equalizer (0.2.0)
     dry-logic (0.4.2)
@@ -283,7 +283,7 @@ PLATFORMS
 
 DEPENDENCIES
   api-ai-ruby
-  capistrano
+  capistrano (= 3.8.2)
   capistrano-bundler
   capistrano-passenger
   capistrano-rails
