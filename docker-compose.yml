@@ -1,0 +1,46 @@
+version: "3"
+services:
+  database:
+    image: mysql:5.7
+    restart: always
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: "toor"
+  redis:
+    image: redis:3.2-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./data/redis:/var/lib/redis/data
+  sidekiq:
+    build: .
+    command: bundle exec sidekiq -q default -q mailers
+    volumes:
+      - .:/AssistantAPI
+    depends_on:
+      - database
+      - redis
+    environment: &environment
+      RAILS_ENV: "development"
+      DATABASE_HOST: "database"
+      DATABASE_USER: "root"
+      DATABASE_PASSWORD: "toor"
+      REDIS_URL: "redis://redis:6379/0"
+  web:
+    build: .
+    environment:
+      <<: *environment
+    command: bundle exec rails s -p 3000 -b "0.0.0.0"
+    restart: always
+    volumes:
+      - .:/AssistantAPI
+    ports:
+      - "3000:3000"
+    tty: true
+    stdin_open: true
+    depends_on:
+      - database
+      - redis
