@@ -26,7 +26,7 @@ group :development do
 end
 
 group :production, :staging do
-  gem "capistrano"
+  gem "capistrano", "3.8.2"
   gem "capistrano-bundler"
   gem "capistrano-rails"
   gem "capistrano-rvm"

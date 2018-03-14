@@ -1,5 +1,5 @@
 # config valid only for current version of Capistrano
-lock "3.10.1"
+lock "3.8.2"
 
 set :application, ENV["REPO_URL"].split("/").last.gsub(".git","")
 set :repo_url, ENV["REPO_URL"]
@@ -83,12 +83,11 @@ namespace :deploy do
       within "#{release_path}" do
         with rails_env: fetch(:rails_env) do
           execute :rake, "db:create"
-          execute :rake, "db:migrate"
         end
       end
     end
   end
-  before :create_database
+  before :migrate, :create_database
 
   desc "link dotenv"
   task :link_dotenv do
