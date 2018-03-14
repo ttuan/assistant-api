@@ -83,11 +83,12 @@ namespace :deploy do
       within "#{release_path}" do
         with rails_env: fetch(:rails_env) do
           execute :rake, "db:create"
+          execute :rake, "db:migrate"
         end
       end
     end
   end
-  before :migrate, :create_database
+  before :create_database
 
   desc "link dotenv"
   task :link_dotenv do
