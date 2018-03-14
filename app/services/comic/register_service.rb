@@ -33,6 +33,6 @@ class Comic::RegisterService
   end
 
   def nice_result? name, comic_name
-    name.downcase.include?(comic_name.downcase)
+    name.downcase.sub("-", " ").include?(comic_name.downcase)
   end
 end
