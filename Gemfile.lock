@@ -55,6 +55,7 @@ GEM
       activesupport (>= 3.0)
       deep_merge (~> 1.2.1)
       dry-validation (>= 0.10.4)
+    connection_pool (2.2.1)
     crass (1.0.3)
     declarative (0.0.10)
     declarative-option (0.1.0)
@@ -172,6 +173,8 @@ GEM
     public_suffix (3.0.2)
     puma (3.11.3)
     rack (2.0.4)
+    rack-protection (2.0.1)
+      rack
     rack-test (0.8.3)
       rack (>= 1.0, < 3)
     rails (5.1.5)
@@ -201,12 +204,18 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
+    redis (4.0.1)
     representable (3.0.4)
       declarative (< 0.1.0)
       declarative-option (< 0.2.0)
       uber (< 0.2.0)
     retriable (3.1.1)
     ruby_dep (1.5.0)
+    sidekiq (5.1.1)
+      concurrent-ruby (~> 1.0)
+      connection_pool (~> 2.2, >= 2.2.0)
+      rack-protection (>= 1.5.0)
+      redis (>= 3.3.5, < 5)
     signet (0.8.1)
       addressable (~> 2.3)
       faraday (~> 0.9)
@@ -253,6 +262,7 @@ DEPENDENCIES
   pry
   puma (~> 3.7)
   rails (~> 5.1.5)
+  sidekiq
   spring
   spring-watcher-listen (~> 2.0.0)
   tzinfo-data
