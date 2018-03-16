@@ -1,0 +1,16 @@
+default: &default
+  adapter: mysql2
+  pool: 5
+  timeout: 5000
+  username: root
+  password: <%= ENV['DB_PASSWORD'] %>
+  host: db
+test:
+  <<: *default
+  database: assistant-api_test
+development:
+  <<: *default
+  database: assistant-api_development
+production:
+  <<: *default
+  database: assistant-api_production
