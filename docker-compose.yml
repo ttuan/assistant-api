@@ -1,1 +1,29 @@
-containers/development/docker-compose.yml
+version: '2'
+services:
+  db:
+    image: mysql:5.7
+    ports:
+      - 3306:3306
+    env_file:
+      - containers/development/.env
+  app:
+    tty: true
+    stdin_open: true
+    build:
+      context: .
+      dockerfile: containers/development/Dockerfile
+    env_file:
+      - containers/development/.env
+    command: containers/scripts/wait-for-it.sh db:3306 -- containers/development/entrypoint
+    depends_on:
+      - db
+    volumes:
+      - .:/usr/app/assistant-api
+    volumes_from:
+      - box
+    ports:
+      - 3000:3000
+  box:
+    image: busybox
+    volumes:
+      - /box
